@@ -11,27 +11,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 
 app.post("/shorten", async (req, res) => {
-  try {
-    const { url } = req.body;
+  const { url } = req.body;
 
-    if (!url) {
-      return res.status(400).json({ error: "URL é obrigatória" });
-    }
+  const shortUrl = Math.random().toString(36).substring(2, 8);
 
-    const shortUrl = Math.random().toString(36).substring(2, 8);
+  await db.query(
+    "INSERT INTO links (original_url, short_url) VALUES ($1, $2)",
+    [url, shortUrl]
+  );
 
-    console.log(`Inserindo no banco: ${url} -> ${shortUrl}`);
-
-    await db.query(
-      "INSERT INTO links (original_url, short_url) VALUES ($1, $2)",
-      [url, shortUrl]
-    );
-
-    return res.json({ shortUrl: `${process.env.BASE_URL}/${shortUrl}` });
-  } catch (error) {
-    console.error("Erro ao encurtar URL:", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
-  }
+  res.json({ shortUrl: `${process.env.BASE_URL}/${shortUrl}` });
 });
 
 app.get("/:shortUrl", async (req, res) => {
