@@ -9,17 +9,23 @@ shortenBtn.addEventListener("click", async () => {
     return;
   }
 
-  const response = await fetch("http://localhost:5000/shorten", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ url: originalUrl }),
-  });
+  try {
+    const response = await fetch("/api/shorten", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: originalUrl }),
+    });
 
-  const data = await response.json();
+    if (!response.ok) throw new Error("Erro ao encurtar o link");
 
-  if (data.shortUrl) {
-    result.innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+    const data = await response.json();
+
+    if (data.shortUrl) {
+      result.innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+    }
+  } catch (error) {
+    alert(`Erro: ${error.message}`);
   }
 });
