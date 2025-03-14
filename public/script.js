@@ -9,23 +9,17 @@ shortenBtn.addEventListener("click", async () => {
     return;
   }
 
-  try {
-    const response = await fetch("/api/shorten", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url: originalUrl }),
-    });
+  const response = await fetch("https://placestools.vercel.app/api/shorten", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url: originalUrl }),
+  });
 
-    if (!response.ok) throw new Error("Erro ao encurtar o link");
+  const data = await response.json();
 
-    const data = await response.json();
-
-    if (data.shortUrl) {
-      result.innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
-    }
-  } catch (error) {
-    alert(`Erro: ${error.message}`);
+  if (data.shortUrl) {
+    result.innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
   }
 });
