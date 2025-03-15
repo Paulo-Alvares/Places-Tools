@@ -1,19 +1,31 @@
 document.getElementById("linkForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const originalLink = document.getElementById("originalLink").value;
+  const originalUrl = document.getElementById("originalUrl").value;
 
-  const res = await fetch("/api/shorten", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ originalLink }),
-  });
+  try {
+    const res = await fetch("/api/shorten", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ originalUrl }),
+    });
 
-  const data = await res.json();
+    if (!res.ok) {
+      const errorText = await res.text(); // Para capturar a mensagem de erro do servidor
+      throw new Error(`Erro: ${res.status} - ${errorText}`);
+    }
 
-  if (data.shortLink) {
+    const data = await res.json();
+
+    if (data.shortUrl) {
+      document.getElementById("result").innerHTML = `
+        <p>Link encurtado: <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a></p>
+      `;
+    }
+  } catch (error) {
+    console.error("Erro ao encurtar link:", error);
     document.getElementById("result").innerHTML = `
-      <p>Link encurtado: <a href="${data.shortLink}" target="_blank">${data.shortLink}</a></p>
+      <p style="color: red;">Erro ao encurtar link: ${error.message}</p>
     `;
   }
 });
