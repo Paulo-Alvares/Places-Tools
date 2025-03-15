@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const { Pool } = require("pg");
 const crypto = require("crypto");
 
@@ -10,7 +11,7 @@ const pool = new Pool({
 });
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/api/shorten", async (req, res) => {
   const { originalLink } = req.body;
@@ -43,6 +44,5 @@ app.get("api/:shortId", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
