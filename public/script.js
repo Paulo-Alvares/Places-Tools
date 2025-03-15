@@ -1,25 +1,19 @@
-const shortenBtn = document.getElementById("shortenBtn");
-const result = document.getElementById("result");
+document.getElementById("linkForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-shortenBtn.addEventListener("click", async () => {
-  const originalUrl = document.getElementById("originalUrl").value;
+  const originalLink = document.getElementById("originalLink").value;
 
-  if (!originalUrl) {
-    alert("Por favor, insira um link!");
-    return;
-  }
-
-  const response = await fetch("https://placestools.vercel.app/api/shorten", {
+  const res = await fetch("/api/shorten", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ url: originalUrl }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ originalLink }),
   });
 
-  const data = await response.json();
+  const data = await res.json();
 
-  if (data.shortUrl) {
-    result.innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+  if (data.shortLink) {
+    document.getElementById("result").innerHTML = `
+      <p>Link encurtado: <a href="${data.shortLink}" target="_blank">${data.shortLink}</a></p>
+    `;
   }
 });

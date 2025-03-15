@@ -1,20 +1,14 @@
 {
-"builds": [
+  "builds": [
     {
-      "src": "api/server.js",
+      "src": "server.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/server.js" },
-    { "src": "/(.*)", "dest": "/public/$1" }
-  ],
-  "env": {
-    "DATABASE_URL": "postgresql://neondb_owner:npg_8dZan0CLWcxb@ep-morning-truth-a5ps6vwp-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require",
-    "BASE_URL": "https://placestools.vercel.app"
-  }
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    }
+  ]
 }

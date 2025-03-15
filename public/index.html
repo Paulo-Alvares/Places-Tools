@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encurtador de Links</title>
     <link rel="stylesheet" href="./style.css" />
+    <title>Encurtador de Links</title>
   </head>
   <body>
     <div class="container">
       <h1>Encurtador de Links</h1>
-      <input type="text" id="originalUrl" placeholder="Cole o link aqui..." />
-      <button id="shortenBtn">Encurtar</button>
+      <form id="linkForm">
+        <input
+          type="url"
+          id="originalLink"
+          placeholder="Cole o link aqui..."
+          required
+        />
+        <button type="submit">Encurtar</button>
+      </form>
       <div id="result"></div>
     </div>
 
