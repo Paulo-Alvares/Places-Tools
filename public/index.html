@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Encurtador de Links</title>
+    <title>PlacesTools - URL Shortener</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Encurtador de Links</h1>
-      <form id="linkForm">
-        <input
-          type="url"
-          id="originalUrl"
-          placeholder="Cole o link aqui..."
-          required
-        />
-        <button type="submit">Encurtar</button>
-      </form>
-      <div id="result"></div>
-    </div>
+    <h1>Encurtador de Links</h1>
+    <input type="text" id="urlInput" placeholder="Cole sua URL aqui" />
+    <button onclick="shortenUrl()">Encurtar</button>
+    <p id="result"></p>
 
-    <script src="./script.js"></script>
+    <script>
+      async function shortenUrl() {
+        const url = document.getElementById("urlInput").value;
+        const response = await fetch("/api/shorten", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          document.getElementById("result").innerText = `Erro: ${error.error}`;
+          return;
+        }
+
+        const result = await response.json();
+        document.getElementById(
+          "result"
+        ).innerText = `URL encurtada: https://placestools.vercel.app/api/redirect?shortUrl=${result.short_url}`;
+      }
+    </script>
   </body>
 </html>
