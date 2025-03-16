@@ -11,6 +11,21 @@
     <button onclick="shortenUrl()">Encurtar</button>
     <p id="result"></p>
 
+    <div>
+      <button onclick="loadLinks()">Carregar Links</button>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>URL Original</th>
+            <th>URL Encurtada</th>
+            <th>Cliques</th>
+            <th>Data de Criação</th>
+          </tr>
+        </thead>
+        <tbody id="linksTableBody"></tbody>
+      </table>
+    </div>
+
     <script>
       async function shortenUrl() {
         const url = document.getElementById("urlInput").value;
@@ -30,6 +45,39 @@
         document.getElementById(
           "result"
         ).innerText = `URL encurtada: https://placestools.vercel.app/api/redirect?shortUrl=${result.short_url}`;
+      }
+
+      async function loadLinks() {
+        const response = await fetch("/api/list");
+        if (!response.ok) {
+          const error = await response.json();
+          alert(`Erro: ${error.error}`);
+          return;
+        }
+
+        const links = await response.json();
+        const tableBody = document.getElementById("linksTableBody");
+
+        tableBody.innerHTML = "";
+
+        links.forEach((link) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td>
+        <a href="${link.original_url}" target="_blank">${link.original_url}</a>
+      </td>
+      <td>
+        <a href="https://placestools.vercel.app/${
+          link.short_url
+        }" target="_blank">
+          ${link.short_url}
+        </a>
+      </td>
+      <td>${link.clicks}</td>
+      <td>${new Date(link.created_at).toLocaleString()}</td>
+    `;
+          tableBody.appendChild(row);
+        });
       }
     </script>
   </body>
