@@ -42,9 +42,11 @@
         }
 
         const result = await response.json();
-        document.getElementById(
-          "result"
-        ).innerText = `URL encurtada: https://placestools.vercel.app/api/redirect?shortUrl=${result.short_url}`;
+        document.getElementById("shortUrl").innerHTML = `
+          <a href="https://placestools.vercel.app/${data.shortUrl}" target="_blank">
+            https://placestools.vercel.app/${data.shortUrl}
+          </a>
+        `;
       }
 
       async function loadLinks() {
