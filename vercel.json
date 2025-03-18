@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/:shortUrl",
-      "destination": "/api/redirect?shortUrl=:shortUrl"
+      "destination": "/api/:shortUrl"
     }
   ]
 }
