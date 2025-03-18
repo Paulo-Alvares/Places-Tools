@@ -42,9 +42,9 @@
         }
 
         const result = await response.json();
-        document.getElementById("shortUrl").innerHTML = `
-          <a href="https://placestools.vercel.app/${data.shortUrl}" target="_blank">
-            https://placestools.vercel.app/${data.shortUrl}
+        document.getElementById("result").innerHTML = `
+          <a href="https://placestools.vercel.app/api/${data.shortUrl}" target="_blank">
+            https://placestools.vercel.app/api/${data.shortUrl}
           </a>
         `;
       }
