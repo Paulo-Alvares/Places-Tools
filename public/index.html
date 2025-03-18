@@ -43,8 +43,9 @@
 
         const result = await response.json();
         document.getElementById("result").innerHTML = `
-          <a href="https://placestools.vercel.app/api/${data.shortUrl}" target="_blank">
-            https://placestools.vercel.app/api/${data.shortUrl}
+          URL encurtada: 
+          <a href="https://placestools.vercel.app/api/${result.short_url}" target="_blank">
+            https://placestools.vercel.app/api/${result.short_url}
           </a>
         `;
       }
