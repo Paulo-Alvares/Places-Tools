@@ -17,6 +17,8 @@ async function shortenUrl(url) {
     document.getElementById(
       "result"
     ).innerHTML = `URL encurtada: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+    
+    loadLinks();
   } catch (error) {
     console.error("Erro ao encurtar URL:", error);
     document.getElementById("result").textContent =
@@ -43,6 +45,22 @@ window.addEventListener("unhandledrejection", (event) => {
     "Ocorreu um erro ao processar a requisição.  Tente novamente mais tarde.";
 });
 
+function copyToClipboard() {
+  var textToCopy = document.getElementById("result").innerText;
+  navigator.clipboard
+    .writeText(textToCopy)
+    .then(() => {
+      var modal = document.querySelector(".modal");
+      modal.classList.add("active");
+      setTimeout(() => {
+        modal.classList.remove("active");
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error("Erro ao copiar texto: ", err);
+    });
+}
+
 async function loadLinks() {
   const response = await fetch("/api/list");
   if (!response.ok) {
@@ -60,9 +78,7 @@ async function loadLinks() {
     const row = document.createElement("div");
     row.innerHTML = `
       <div>
-        <a href="https://placestools.vercel.app/${
-          link.short_url
-        }" target="_blank">https://placestools.vercel.app/
+        <a href="https://placestools.vercel.app/${link.short_url}" target="_blank">https://placestools.vercel.app/
           ${link.short_url}
         </a>
       </div>

@@ -8,19 +8,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="loadLinks()">
+    <div class="modal">
+      <p>✅ Texto copiado com Sucesso!</p>
+    </div>
+
     <section class="left_side">
       <img src="assets/logo_meli.svg" alt="Logo do Mercado Livre" />
-      <h1>Encurtador de Links</h1>
-      <div class="original_url_group">
-        <label for="original_url">Link original</label>
-        <input type="text" id="original_url" />
-      </div>
-      <div class="shorten_url_group">
-        <p>Link encurtado</p>
-        <div class="shorten_url">
-          <img src="assets/link_icon.svg" alt="Ícone de Link" />
-          <p id="result">https://placestools.vercel.app/a1b2c3d4</p>
-          <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+
+      <div class="container">
+        <h1>Encurtador de Links</h1>
+        <div class="original_url_group">
+          <label class="label" for="original_url">Link original</label>
+          <input type="text" id="original_url" />
+        </div>
+        <div class="shorten_url_group">
+          <p class="label">Link encurtado</p>
+          <div class="shorten_url">
+            <p id="result"></p>
+            <div class="copy" onclick="copyToClipboard()">
+              <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

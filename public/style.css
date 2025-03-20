@@ -1,0 +1,139 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./fonts/ProximaNova-Regular.woff2") format("woff2"),
+    url("./fonts/ProximaNova-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova SemiBold";
+  src: url("./fonts/ProximaNova-SemiBold.woff") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Proxima Nova Bold";
+  src: url("./fonts/ProximaNova-ExtraBold.woff") format("woff");
+  font-weight: bolder;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Proxima Nova", serif;
+}
+
+body {
+  background-color: #ebebeb;
+  display: flex;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.modal {
+  background-color: #fff;
+  position: absolute;
+  right: 10px;
+  top: -40px;
+  padding: 5px;
+  width: 300px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: .5s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal.active {
+  top: 10px;
+}
+
+.left_side {
+  background-color: #ffed06;
+  height: 100vh;
+  width: 40vw;
+  padding: 5rem;
+  display: flex;
+  gap: 4.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+}
+
+.left_side img {
+  width: 150px;
+}
+
+.left_side .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.left_side .container .container h1 {
+  font-size: 1.5rem;
+  font-family: "Proxima Nova Bold", serif;
+}
+
+.left_side .container div .label {
+  font-family: "Proxima Nova SemiBold", serif;
+  font-size: 1.2rem;
+}
+
+.left_side .container .original_url_group,
+.left_side .container .shorten_url_group {
+  height: 20%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.left_side .container .original_url_group input,
+.left_side .container .shorten_url_group .shorten_url {
+  padding: 1rem;
+  outline: none;
+  border: none;
+  background-color: #fff89e;
+  flex: 1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.left_side .container .shorten_url_group .shorten_url {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.667rem;
+}
+
+.left_side .container .shorten_url_group .shorten_url img {
+  width: 1rem;
+}
+
+.left_side .container .shorten_url_group .shorten_url .copy {
+  background-color: #fffde8;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.left_side .container .shorten_url_group .shorten_url .copy img {
+  height: 50%;
+}
+
+.left_side .container .shorten_url_group .shorten_url .copy:hover {
+  background-color: #ebebeb;
+}
