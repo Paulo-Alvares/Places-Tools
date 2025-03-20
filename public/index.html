@@ -3,85 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PlacesTools - URL Shortener</title>
+    <link rel="shortcut icon" href="assets/logo_meli.ico" type="image/x-icon" />
+    <title>PlacesTools - Encurtador de Links</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1>Encurtador de Links</h1>
-    <input type="text" id="urlInput" placeholder="Cole sua URL aqui" />
-    <button onclick="shortenUrl()">Encurtar</button>
-    <p id="result"></p>
+  <body onload="loadLinks()">
+    <section class="left_side">
+      <img src="assets/logo_meli.svg" alt="Logo do Mercado Livre" />
+      <h1>Encurtador de Links</h1>
+      <div class="original_url_group">
+        <label for="original_url">Link original</label>
+        <input type="text" id="original_url" />
+      </div>
+      <div class="shorten_url_group">
+        <p>Link encurtado</p>
+        <div class="shorten_url">
+          <img src="assets/link_icon.svg" alt="Ícone de Link" />
+          <p id="result">https://placestools.vercel.app/a1b2c3d4</p>
+          <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+        </div>
+      </div>
+    </section>
 
-    <div>
-      <button onclick="loadLinks()">Carregar Links</button>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>URL Original</th>
-            <th>URL Encurtada</th>
-            <th>Cliques</th>
-            <th>Data de Criação</th>
-          </tr>
-        </thead>
-        <tbody id="linksTableBody"></tbody>
-      </table>
-    </div>
+    <section id="rigth_side"></section>
 
-    <script>
-      async function shortenUrl() {
-        const url = document.getElementById("urlInput").value;
-        const response = await fetch("/api/shorten", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url }),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          document.getElementById("result").innerText = `Erro: ${error.error}`;
-          return;
-        }
-
-        const result = await response.json();
-        document.getElementById("result").innerHTML = `
-          URL encurtada: 
-          <a href="https://placestools.vercel.app/${result.short_url}" target="_blank">
-            https://placestools.vercel.app/${result.short_url}
-          </a>
-        `;
-      }
-
-      async function loadLinks() {
-        const response = await fetch("/api/list");
-        if (!response.ok) {
-          const error = await response.json();
-          alert(`Erro: ${error.error}`);
-          return;
-        }
-
-        const links = await response.json();
-        const tableBody = document.getElementById("linksTableBody");
-
-        tableBody.innerHTML = "";
-
-        links.forEach((link) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-      <td>
-        <a href="${link.original_url}" target="_blank">${link.original_url}</a>
-      </td>
-      <td>
-        <a href="https://placestools.vercel.app/${
-          link.short_url
-        }" target="_blank">
-          ${link.short_url}
-        </a>
-      </td>
-      <td>${link.clicks}</td>
-      <td>${new Date(link.created_at).toLocaleString()}</td>
-    `;
-          tableBody.appendChild(row);
-        });
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
