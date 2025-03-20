@@ -114,8 +114,9 @@ body {
   padding: 0.667rem;
 }
 
-.left_side .container .shorten_url_group .shorten_url img {
-  width: 1rem;
+.left_side .container .shorten_url_group .shorten_url p a {
+  text-decoration: none;
+  color: black;
 }
 
 .left_side .container .shorten_url_group .shorten_url .copy {

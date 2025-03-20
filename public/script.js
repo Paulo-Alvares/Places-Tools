@@ -16,8 +16,8 @@ async function shortenUrl(url) {
     const shortUrl = `https://placestools.vercel.app/${result.short_url}`;
     document.getElementById(
       "result"
-    ).innerHTML = `URL encurtada: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
-    
+    ).innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+
     loadLinks();
   } catch (error) {
     console.error("Erro ao encurtar URL:", error);
