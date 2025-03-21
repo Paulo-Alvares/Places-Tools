@@ -58,6 +58,7 @@ a {
   top: 10px;
 }
 
+/* Lado Esquerdo */
 .left_side {
   background-color: #ffed06;
   height: 100vh;
@@ -113,6 +114,7 @@ a {
 }
 
 .left_side .container .shorten_url_group .shorten_url {
+  min-height: 52px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -193,9 +195,10 @@ a {
 }
 
 .right_side #cards .card .card_link {
+  width: 70%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
 }
 
 .right_side #cards .card .card_link .copy {
