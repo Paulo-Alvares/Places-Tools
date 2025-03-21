@@ -16,7 +16,12 @@ async function shortenUrl(url) {
     const shortUrl = `https://placestools.vercel.app/${result.short_url}`;
     document.getElementById(
       "result"
-    ).innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+    ).innerHTML = `
+      <a href="${shortUrl}" target="_blank">${shortUrl}</a>
+      <div class="copy" onclick="copyToClipboard(event)">
+        <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+      </div>
+      `;
 
     loadLinks();
   } catch (error) {
@@ -45,20 +50,29 @@ window.addEventListener("unhandledrejection", (event) => {
     "Ocorreu um erro ao processar a requisição.  Tente novamente mais tarde.";
 });
 
-function copyToClipboard() {
-  var textToCopy = document.getElementById("result").innerText;
-  navigator.clipboard
-    .writeText(textToCopy)
-    .then(() => {
-      var modal = document.querySelector(".modal");
-      modal.classList.add("active");
-      setTimeout(() => {
-        modal.classList.remove("active");
-      }, 2000);
-    })
-    .catch((err) => {
-      console.error("Erro ao copiar texto: ", err);
-    });
+function copyToClipboard(event) {
+  var copyButton = event.currentTarget;
+  
+  var textToCopyElement = copyButton.parentElement.querySelector('a');
+  
+  if (textToCopyElement) {
+    var textToCopy = textToCopyElement.href || textToCopyElement.innerText;
+
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        var modal = document.querySelector(".modal");
+        modal.classList.add("active");
+        setTimeout(() => {
+          modal.classList.remove("active");
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Erro ao copiar texto: ", err);
+      });
+  } else {
+    console.error("Não foi possível encontrar o elemento de texto para copiar.");
+  }
 }
 
 async function loadLinks() {
@@ -70,20 +84,26 @@ async function loadLinks() {
   }
 
   const links = await response.json();
-  const rightSide = document.getElementById("rigth_side");
+  const cards = document.getElementById("cards");
 
-  rightSide.innerHTML = "";
+  cards.innerHTML = "";
 
   links.forEach((link) => {
     const row = document.createElement("div");
     row.innerHTML = `
-      <div>
-        <a href="https://placestools.vercel.app/${link.short_url}" target="_blank">https://placestools.vercel.app/
-          ${link.short_url}
-        </a>
+      <div class="card">
+        <div class="card_link">
+          <a href="https://placestools.vercel.app/${link.short_url}" target="_blank">
+            https://placestools.vercel.app/${link.short_url}
+          </a>
+          <div class="copy" onclick="copyToClipboard(event)">
+            <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+          </div>
+        </div>
+        <div class="bar"></div>
+        <p>${link.clicks}</p>
       </div>
-      <div>${link.clicks}</div>
     `;
-    rightSide.appendChild(row);
+    cards.appendChild(row);
   });
 }

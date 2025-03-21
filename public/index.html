@@ -9,7 +9,7 @@
   </head>
   <body onload="loadLinks()">
     <div class="modal">
-      <p>✅ Texto copiado com Sucesso!</p>
+      <p>✅ Link copiado com Sucesso!</p>
     </div>
 
     <section class="left_side">
@@ -23,17 +23,18 @@
         </div>
         <div class="shorten_url_group">
           <p class="label">Link encurtado</p>
-          <div class="shorten_url">
-            <p id="result"></p>
-            <div class="copy" onclick="copyToClipboard()">
-              <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
-            </div>
-          </div>
+          <div class="shorten_url" id="result"></div>
         </div>
       </div>
     </section>
 
-    <section id="rigth_side"></section>
+    <section class="right_side">
+      <div class="cards_title">
+        <p>Links gerados</p>
+        <p>Cliques</p>
+      </div>
+      <div class="cards"></div>
+    </section>
 
     <script src="script.js"></script>
   </body>
