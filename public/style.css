@@ -165,7 +165,7 @@ a {
   font-family: "Proxima Nova SemiBold", serif;
 }
 
-.right_side .cards {
+.right_side #cards {
   width: 100%;
   height: 0;
   display: flex;
@@ -177,11 +177,11 @@ a {
   scrollbar-width: none;
 }
 
-.right_side .cards::-webkit-scrollbar {
+.right_side #cards::-webkit-scrollbar {
   display: none;
 }
 
-.right_side .cards .card {
+.right_side #cards .card {
   background-color: #fff;
   width: 100%;
   padding: 1rem 2rem;
@@ -192,13 +192,13 @@ a {
   align-items: center;
 }
 
-.right_side .cards .card .card_link {
+.right_side #cards .card .card_link {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.right_side .cards .card .card_link .copy {
+.right_side #cards .card .card_link .copy {
   background-color: #fffde8;
   border-radius: 6px;
   display: flex;
@@ -210,21 +210,21 @@ a {
   transition: 0.15s ease;
 }
 
-.right_side .cards .card .card_link .copy img {
+.right_side #cards .card .card_link .copy img {
   height: 50%;
 }
 
-.right_side .cards .card .card_link .copy:hover {
+.right_side #cards .card .card_link .copy:hover {
   background-color: #ebebeb;
 }
 
-.right_side .cards .card .bar {
+.right_side #cards .card .bar {
   width: 2px;
   border-radius: 2rem;
   height: 100%;
   background-color: #c3c3c3;
 }
 
-.right_side .cards .card p {
+.right_side #cards .card p {
   margin-right: 1.3rem;
 }

@@ -84,7 +84,7 @@ async function loadLinks() {
   }
 
   const links = await response.json();
-  const cards = document.getElementsByClassName("cards");
+  const cards = document.getElementById("cards");
 
   cards.innerHTML = "";
 
