@@ -58,13 +58,13 @@
 
 # 🔗Recursos Adicionais
 ### 🎨Design
-  - <a href="">Protótipo</a>
-  - <a href="">Fontes</a>
-  - <a href="">Ícones</a>
+  - <a href="https://www.figma.com/design/uSFWJMxVwdPZf6xItq21wQ/Places-Tools?node-id=18-37&t=kZOdQhAtsM0xNAA4-4">Protótipo</a>
+  - <a href="https://www.dafontfree.io/proxima-nova-font-free/">Fontes</a>
 
 ### 🔧Ferramentas
   - <a href="https://code.visualstudio.com/download">Visual Studio Code</a>
   - <a href="https://www.figma.com/">Figma</a>
+  - <a href="https://vercel.com/">Vercel</a>
   - <a href="https://neon.tech/">Neon</a>
 
 ### 📦Linguagens e Pacotes
