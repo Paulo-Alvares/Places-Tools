@@ -1,3 +1,5 @@
+let originalUrlInput = document.getElementById("original_url");
+
 async function shortenUrl(url) {
   try {
     const response = await fetch("/api/shorten", {
@@ -14,9 +16,7 @@ async function shortenUrl(url) {
 
     const result = await response.json();
     const shortUrl = `https://placestools.vercel.app/${result.short_url}`;
-    document.getElementById(
-      "result"
-    ).innerHTML = `
+    document.getElementById("result").innerHTML = `
       <a href="${shortUrl}" target="_blank">${shortUrl}</a>
       <div class="copy" onclick="copyToClipboard(event)">
         <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
@@ -31,10 +31,12 @@ async function shortenUrl(url) {
   }
 }
 
-document.getElementById("original_url").addEventListener("paste", async (e) => {
+originalUrlInput.addEventListener("paste", async (e) => {
   e.preventDefault();
 
   const text = e.clipboardData.getData("text/plain");
+  originalUrlInput.value = text
+  
   if (text) {
     shortenUrl(text);
   }
@@ -52,9 +54,9 @@ window.addEventListener("unhandledrejection", (event) => {
 
 function copyToClipboard(event) {
   var copyButton = event.currentTarget;
-  
-  var textToCopyElement = copyButton.parentElement.querySelector('a');
-  
+
+  var textToCopyElement = copyButton.parentElement.querySelector("a");
+
   if (textToCopyElement) {
     var textToCopy = textToCopyElement.href || textToCopyElement.innerText;
 
@@ -71,7 +73,9 @@ function copyToClipboard(event) {
         console.error("Erro ao copiar texto: ", err);
       });
   } else {
-    console.error("Não foi possível encontrar o elemento de texto para copiar.");
+    console.error(
+      "Não foi possível encontrar o elemento de texto para copiar."
+    );
   }
 }
 
