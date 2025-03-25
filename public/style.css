@@ -186,7 +186,7 @@ a {
 .right_side #cards .card {
   background-color: #fff;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: .657rem 2rem;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   display: flex;
@@ -221,7 +221,7 @@ a {
   background-color: #ebebeb;
 }
 
-.right_side #cards .card .bar {
+.bar {
   width: 2px;
   border-radius: 2rem;
   height: 100%;
