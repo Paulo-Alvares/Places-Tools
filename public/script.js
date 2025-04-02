@@ -93,12 +93,17 @@ async function loadLinks() {
   cards.innerHTML = "";
 
   links.forEach((link) => {
+    const isTablet = window.innerWidth <= 768;
+
+    const linkText = isTablet ? link.short_url : `https://placestools.vercel.app/${link.short_url}`;
+    const linkHref = `https://placestools.vercel.app/${link.short_url}`;
+
     const row = document.createElement("div");
     row.innerHTML = `
       <div class="card">
         <div class="card_link">
-          <a href="https://placestools.vercel.app/${link.short_url}" target="_blank">
-            https://placestools.vercel.app/${link.short_url}
+          <a href="${linkHref}" target="_blank">
+            ${linkText}
           </a>
           <div class="copy" onclick="copyToClipboard(event)">
             <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
@@ -111,3 +116,5 @@ async function loadLinks() {
     cards.appendChild(row);
   });
 }
+
+window.addEventListener('resize', loadLinks);

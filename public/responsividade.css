@@ -1,0 +1,46 @@
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .left_side,
+  .right_side {
+    width: 100vw;
+    height: 50vh;
+    padding: 2rem;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .left_side img {
+    width: 100px;
+  }
+
+  .left_side .container h1 {
+    font-size: 1.2rem;
+    font-family: "Proxima Nova Bold", serif;
+  }
+
+  .left_side .container div .label {
+    font-family: "Proxima Nova SemiBold", serif;
+    font-size: 14px;
+  }
+
+  .left_side .container .shorten_url_group {
+    margin-top: 1rem;
+  }
+
+  .left_side .container .original_url_group input,
+  .left_side .container .shorten_url_group .shorten_url {
+    padding: 0.5rem;
+    font-size: 12px;
+    min-height: 2.5rem;
+  }
+
+  .right_side .cards_title {
+    height: 2.5rem;
+    font-size: 1rem;
+    align-items: center;
+  }
+}

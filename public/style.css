@@ -84,7 +84,7 @@ a {
   justify-content: space-around;
 }
 
-.left_side .container .container h1 {
+.left_side .container h1 {
   font-size: 1.5rem;
   font-family: "Proxima Nova Bold", serif;
 }
