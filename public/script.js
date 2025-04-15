@@ -35,8 +35,8 @@ originalUrlInput.addEventListener("paste", async (e) => {
   e.preventDefault();
 
   const text = e.clipboardData.getData("text/plain");
-  originalUrlInput.value = text
-  
+  originalUrlInput.value = text;
+
   if (text) {
     shortenUrl(text);
   }
@@ -95,7 +95,9 @@ async function loadLinks() {
   links.forEach((link) => {
     const isTablet = window.innerWidth <= 768;
 
-    const linkText = isTablet ? link.short_url : `https://placestools.vercel.app/${link.short_url}`;
+    const linkText = isTablet
+      ? link.short_url
+      : `https://placestools.vercel.app/${link.short_url}`;
     const linkHref = `https://placestools.vercel.app/${link.short_url}`;
 
     const row = document.createElement("div");
@@ -117,4 +119,27 @@ async function loadLinks() {
   });
 }
 
-window.addEventListener('resize', loadLinks);
+window.addEventListener("resize", loadLinks);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const modalOverlay = document.getElementById("copyrightModal");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  function openModal() {
+    modalOverlay.classList.add("active");
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove("active");
+  }
+
+  closeModalBtn.addEventListener("click", closeModal);
+
+  modalOverlay.addEventListener("click", function (event) {
+    if (event.target === modalOverlay) {
+      closeModal();
+    }
+  });
+
+  openModal()
+});
