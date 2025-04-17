@@ -80,7 +80,10 @@ function copyToClipboard(event) {
 }
 
 async function loadLinks() {
-  const response = await fetch("/api/list");
+  const userId = localStorage.getItem("userId");
+  const url = userId ? `/api/list?userId=${userId}` : "/api/list";
+
+  const response = await fetch(url);
   if (!response.ok) {
     const error = await response.json();
     alert(`Erro: ${error.error}`);
@@ -141,5 +144,71 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  openModal()
+  openModal();
 });
+
+// Exibe modais
+document.getElementById("loginBtn").onclick = () => {
+  document.getElementById("loginModal").style.display = "block";
+};
+
+document.getElementById("registerBtn").onclick = () => {
+  document.getElementById("registerModal").style.display = "block";
+};
+
+// Cadastro
+async function register() {
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
+  const confirmPassword = document.getElementById("registerConfirm").value;
+
+  const response = await fetch("/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password, confirmPassword }),
+  });
+
+  const result = await response.json();
+  if (response.ok) {
+    alert("Cadastro realizado!");
+    document.getElementById("registerModal").style.display = "none";
+  } else {
+    alert(result.error || "Erro ao cadastrar.");
+  }
+}
+
+// Login
+async function login() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const response = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const result = await response.json();
+  if (response.ok) {
+    localStorage.setItem("token", result.token);
+    localStorage.setItem("userId", result.userId);
+    alert("Login realizado!");
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("registerBtn").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "inline-block";
+    loadLinks(); // após login, atualiza os links
+  } else {
+    alert(result.error || "Erro ao fazer login.");
+  }
+}
+
+// Logout
+document.getElementById("logoutBtn").onclick = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  document.getElementById("loginBtn").style.display = "inline-block";
+  document.getElementById("registerBtn").style.display = "inline-block";
+  document.getElementById("logoutBtn").style.display = "none";
+  loadLinks(); // remove os links do usuário
+};

@@ -5,7 +5,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 module.exports = async (req, res) => {
   if (req.method === "POST") {
-    const { url } = req.body;
+    const { url, userId } = req.body;
 
     if (!url) {
       return res.status(400).json({ error: "URL is required" });
@@ -16,8 +16,8 @@ module.exports = async (req, res) => {
 
     try {
       const result = await pool.query(
-        "INSERT INTO links (original_url, short_url) VALUES ($1, $2) RETURNING *",
-        [url, shortUrl]
+        "INSERT INTO links (original_url, short_url, user_id) VALUES ($1, $2, $3) RETURNING *",
+        [url, shortUrl, userId || null]
       );
       res.status(201).json(result.rows[0]);
     } catch (error) {
