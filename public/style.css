@@ -41,7 +41,7 @@ a {
   background-color: #fff;
   position: absolute;
   right: 10px;
-  top: -40px;
+  top: -50px;
   padding: 5px;
   width: 300px;
   height: 40px;
@@ -58,6 +58,7 @@ a {
   top: 10px;
 }
 
+/* Modal de Aviso */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -117,6 +118,101 @@ a {
   background-color: #ebebeb;
 }
 
+/* Modal de Login e Cadastro */
+.modal-sign {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+.modal-sign.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-sign .sign-content {
+  background-color: #fff;
+  border-radius: 6px;
+  width: 25%;
+  height: 50vh;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-sign .sign-content h2 {
+  width: 100%;
+  background-color: #ffed06;
+  font-size: 1.2em;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.modal-sign .sign-content form {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal-sign .sign-content form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #f1f1f1;
+}
+
+.modal-sign .sign-content input:focus {
+  border: 1px solid #3483fa;
+}
+
+.modal-sign .sign-content button,
+.left_side .header button {
+  background-color: #3483fa;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.modal-sign .sign-content button:hover,
+.left_side .header button:hover {
+  background-color: #2968c8;
+}
+
+.modal-sign .sign-content .register-content {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.modal-sign .sign-content .register-content a {
+  margin-left: 0.3rem;
+  color: #3483fa;
+}
+
 /* Lado Esquerdo */
 .left_side {
   background-color: #ffed06;
@@ -131,7 +227,12 @@ a {
   font-size: 1rem;
 }
 
-.left_side img {
+.left_side .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left_side .header img {
   width: 150px;
 }
 
@@ -166,13 +267,14 @@ a {
   padding: 1rem;
   outline: none;
   border: none;
-  background-color: #fff89e;
+  background-color: #fff;
   flex: 1;
   border-radius: 6px;
   font-size: 1rem;
 }
 
 .left_side .container .shorten_url_group .shorten_url {
+  background-color: #fff89e;
   min-height: 52px;
   display: flex;
   justify-content: space-between;
@@ -245,7 +347,7 @@ a {
 .right_side #cards .card {
   background-color: #fff;
   width: 100%;
-  padding: .657rem 2rem;
+  padding: 0.657rem 2rem;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   display: flex;
