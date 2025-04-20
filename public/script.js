@@ -1,4 +1,25 @@
 let originalUrlInput = document.getElementById("original_url");
+let loginButton = document.getElementById("login-button");
+
+loginButton.addEventListener("click", () => {
+  const modalLogin = document.getElementById("modal-sign");
+
+  function openModal() {
+    modalLogin.classList.add("active");
+  }
+
+  function closeModal() {
+    modalLogin.classList.remove("active");
+  }
+
+  modalLogin.addEventListener("click", function (event) {
+    if (event.target === modalLogin) {
+      closeModal();
+    }
+  });
+
+  openModal();
+});
 
 async function shortenUrl(url) {
   try {

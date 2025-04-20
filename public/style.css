@@ -130,8 +130,8 @@ a {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* visibility: hidden; */
-  /* opacity: 0; */
+  visibility: hidden;
+  opacity: 0;
   transition: visibility 0s, opacity 0.3s ease;
 }
 
@@ -211,6 +211,7 @@ a {
 .modal-sign .sign-content .register-content a {
   margin-left: 0.3rem;
   color: #3483fa;
+  cursor: pointer;
 }
 
 /* Lado Esquerdo */
@@ -271,6 +272,7 @@ a {
   flex: 1;
   border-radius: 6px;
   font-size: 1rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .left_side .container .shorten_url_group .shorten_url {
@@ -314,17 +316,27 @@ a {
   align-items: center;
 }
 
-.right_side .cards_title {
-  background-color: #ffed06;
+.right_side .cards_title,
+.right_side #cards .card {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  gap: .5rem;
+}
+
+.right_side .cards_title .links {
+  flex: 1;
+}
+
+.right_side .cards_title .clicks {
+  min-width: 100px;
+  text-align: center;
 }
 
 .right_side .cards_title p {
+  background-color: #ffed06;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   font-family: "Proxima Nova SemiBold", serif;
 }
 
@@ -344,21 +356,26 @@ a {
   display: none;
 }
 
-.right_side #cards .card {
+.right_side #cards .card .card_link {
   background-color: #fff;
-  width: 100%;
-  padding: 0.657rem 2rem;
+  padding: 0.5rem 2rem;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.right_side #cards .card .card_link {
-  width: 70%;
+.right_side #cards .card .clicks {
+  min-width: 117.45px;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "Proxima Nova", serif;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -380,15 +397,4 @@ a {
 
 .right_side #cards .card .card_link .copy:hover {
   background-color: #ebebeb;
-}
-
-.bar {
-  width: 2px;
-  border-radius: 2rem;
-  height: 100%;
-  background-color: #c3c3c3;
-}
-
-.right_side #cards .card p {
-  margin-right: 1.3rem;
 }

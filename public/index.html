@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <!-- <div class="modal-sign">
+    <div class="modal-sign" id="modal-sign">
       <div class="sign-content">
         <h2>Login</h2>
 
@@ -44,10 +44,16 @@
 
         <div class="register-content">
           <p>Não tem conta?</p>
-          <a class="register-button">Solicitar Acesso</a>
+          <a
+            class="register-button"
+            href="mailto:ext_alvaresp@mercadolivre.com?subject=Solicitação%20de%20Acesso%20ao%20PlacesTools&body=Olá,%20Equipe%20de%20Places!%0A%0AGostaria%20de%20solicitar%20acesso%20ao%20PlacesTools.%0Aemail:%20**seuemail@mercadolivre.com**%0Asenha:%20**suaSenha**.%0A%0AObrigado!"
+            target="_blank"
+          >
+            Solicitar Acesso
+          </a>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="modal">
       <p>✅ Link copiado com Sucesso!</p>
@@ -56,7 +62,7 @@
     <section class="left_side">
       <div class="header">
         <img src="assets/logo_meli.svg" alt="Logo do Mercado Livre" />
-        <!-- <button>Login</button> -->
+        <!-- <button id="login-button">Login</button> -->
       </div>
 
       <div class="container">
@@ -74,10 +80,22 @@
 
     <section class="right_side">
       <div class="cards_title">
-        <p>Links gerados</p>
-        <p>Cliques</p>
+        <p class="links">Links gerados</p>
+        <p class="clicks">Cliques</p>
       </div>
-      <div id="cards"></div>
+      <div id="cards">
+        <div class="card">
+          <div class="card_link">
+            <a href="${linkHref}" target="_blank">
+              a1b2c3d4
+            </a>
+            <div class="copy" onclick="copyToClipboard(event)">
+              <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
+            </div>
+          </div>
+          <p class="clicks">2</p>
+        </div>
+      </div>
     </section>
 
     <script src="script.js"></script>
