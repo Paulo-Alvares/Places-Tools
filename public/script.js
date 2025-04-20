@@ -1,6 +1,6 @@
 let originalUrlInput = document.getElementById("original_url");
 let loginButton = document.getElementById("login-button");
-
+/*
 loginButton.addEventListener("click", () => {
   const modalLogin = document.getElementById("modal-sign");
 
@@ -19,7 +19,7 @@ loginButton.addEventListener("click", () => {
   });
 
   openModal();
-});
+});*/
 
 async function shortenUrl(url) {
   try {
