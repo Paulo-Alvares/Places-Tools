@@ -125,7 +125,7 @@ async function loadLinks() {
     row.innerHTML = `
       <div class="card">
         <div class="card_link">
-          <a href="${linkHref}" target="_blank"> ${linkHref} </a>
+          <a href="${linkHref}" target="_blank"> ${linkText} </a>
           <div class="copy" onclick="copyToClipboard(event)">
             <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
           </div>
