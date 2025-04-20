@@ -114,7 +114,7 @@ async function loadLinks() {
   cards.innerHTML = "";
 
   links.forEach((link) => {
-    const isTablet = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 1110;
 
     const linkText = isTablet
       ? link.short_url
