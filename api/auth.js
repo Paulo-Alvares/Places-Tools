@@ -6,6 +6,10 @@ const bcrypt = require("bcrypt");
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 module.exports = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   if (req.method === "POST") {
     const { email, password } = req.body;
 
