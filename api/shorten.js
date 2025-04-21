@@ -1,4 +1,5 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -6,6 +7,15 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 module.exports = async (req, res) => {
   if (req.method === "POST") {
     const { url } = req.body;
+    let userId = null;
+
+    // Verifica se há token para associar o link ao usuário
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      userId = decoded.id;
+    }
 
     if (!url) {
       return res.status(400).json({ error: "URL is required" });
@@ -16,8 +26,8 @@ module.exports = async (req, res) => {
 
     try {
       const result = await pool.query(
-        "INSERT INTO links (original_url, short_url) VALUES ($1, $2) RETURNING *",
-        [url, shortUrl]
+        "INSERT INTO links (original_url, short_url, user_id) VALUES ($1, $2, $3) RETURNING *",
+        [url, shortUrl, userId]
       );
       res.status(201).json(result.rows[0]);
     } catch (error) {

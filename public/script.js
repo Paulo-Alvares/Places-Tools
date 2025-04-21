@@ -1,5 +1,47 @@
 let originalUrlInput = document.getElementById("original_url");
 let loginButton = document.getElementById("login-button");
+
+async function login(email, password) {
+  try {
+    const response = await fetch("/api/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      alert(`Erro: ${error.error}`);
+      return null;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    alert("Erro inesperado ao fazer login");
+    return null;
+  }
+}
+
+function checkAuth() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      return { isAuthenticated: true, user };
+    } catch {
+      return { isAuthenticated: false };
+    }
+  }
+  return { isAuthenticated: false };
+}
+
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.reload();
+}
+
 /*
 loginButton.addEventListener("click", () => {
   const modalLogin = document.getElementById("modal-sign");
@@ -101,7 +143,15 @@ function copyToClipboard(event) {
 }
 
 async function loadLinks() {
-  const response = await fetch("/api/list");
+  const { isAuthenticated } = checkAuth();
+  const headers = {};
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const response = await fetch("/api/list", { headers });
   if (!response.ok) {
     const error = await response.json();
     alert(`Erro: ${error.error}`);
@@ -160,4 +210,37 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   openModal();
+});
+
+loginButton.addEventListener("click", async () => {
+  const email = prompt("Digite seu e-mail:");
+  const password = prompt("Digite sua senha:");
+
+  if (email && password) {
+    const authData = await login(email, password);
+    if (authData) {
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", JSON.stringify(authData.user));
+      alert("Login realizado com sucesso!");
+      window.location.reload();
+    }
+  }
+});
+
+document.getElementById("logout-button").addEventListener("click", logout);
+
+document.addEventListener("DOMContentLoaded", function() {
+  const { isAuthenticated, user } = checkAuth();
+  const loginButton = document.getElementById("login-button");
+  const logoutButton = document.getElementById("logout-button");
+  
+  if (isAuthenticated) {
+    loginButton.style.display = "none";
+    logoutButton.style.display = "block";
+    // Mostrar email do usuário logado
+    document.getElementById("user-email").textContent = user.email;
+  } else {
+    loginButton.style.display = "block";
+    logoutButton.style.display = "none";
+  }
 });
