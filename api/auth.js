@@ -33,9 +33,11 @@ module.exports = async (req, res) => {
 
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
+        console.log("Senha válida?", validPassword);
+        console.log("Senha digitada:", password);
+        console.log("Senha salva:", user.password);
         return res.status(401).json({ error: "Credenciais inválidas" });
       }
-      console.log("Senha válida?", validPassword);
 
       const token = jwt.sign(
         { id: user.id, email: user.email },
