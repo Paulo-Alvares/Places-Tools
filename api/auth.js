@@ -18,12 +18,10 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-      console.log("Tentativa de login com:", email);
       const userResult = await pool.query(
         "SELECT * FROM users WHERE email = $1",
         [email]
       );
-      console.log("Usuário encontrado:", userResult.rows[0]);
 
       if (userResult.rows.length === 0) {
         return res.status(401).json({ error: "Credenciais inválidas" });
@@ -33,9 +31,6 @@ module.exports = async (req, res) => {
 
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        console.log("Senha válida?", validPassword);
-        console.log("Senha digitada:", password);
-        console.log("Senha salva:", user.password);
         return res.status(401).json({ error: "Credenciais inválidas" });
       }
 

@@ -1,5 +1,22 @@
 let originalUrlInput = document.getElementById("original_url");
 let loginButton = document.getElementById("login-button");
+let loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if (email && password) {
+    const authData = await login(email, password);
+    if (authData) {
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", JSON.stringify(authData.user));
+      alert("Login realizado com sucesso!");
+      window.location.reload();
+    }
+  }
+});
 
 async function login(email, password) {
   try {
@@ -42,7 +59,6 @@ function logout() {
   window.location.reload();
 }
 
-/*
 loginButton.addEventListener("click", () => {
   const modalLogin = document.getElementById("modal-sign");
 
@@ -61,7 +77,7 @@ loginButton.addEventListener("click", () => {
   });
 
   openModal();
-});*/
+});
 
 async function shortenUrl(url) {
   try {
@@ -189,7 +205,9 @@ async function loadLinks() {
 
 window.addEventListener("resize", loadLinks);
 
-document.addEventListener("DOMContentLoaded", function () {
+// Modal de Avisos
+/* 
+  document.addEventListener("DOMContentLoaded", function () {
   const modalOverlay = document.getElementById("copyrightModal");
   const closeModalBtn = document.getElementById("closeModalBtn");
 
@@ -211,29 +229,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   openModal();
 });
-
-loginButton.addEventListener("click", async () => {
-  const email = prompt("Digite seu e-mail:");
-  const password = prompt("Digite sua senha:");
-
-  if (email && password) {
-    const authData = await login(email, password);
-    if (authData) {
-      localStorage.setItem("token", authData.token);
-      localStorage.setItem("user", JSON.stringify(authData.user));
-      alert("Login realizado com sucesso!");
-      window.location.reload();
-    }
-  }
-});
+*/
 
 document.getElementById("logout-button").addEventListener("click", logout);
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const { isAuthenticated, user } = checkAuth();
   const loginButton = document.getElementById("login-button");
   const logoutButton = document.getElementById("logout-button");
-  
+
   if (isAuthenticated) {
     loginButton.style.display = "none";
     logoutButton.style.display = "block";
