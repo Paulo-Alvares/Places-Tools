@@ -248,3 +248,13 @@ document.addEventListener("DOMContentLoaded", function () {
     logoutButton.style.display = "none";
   }
 });
+
+const togglePassword = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
+
+togglePassword.addEventListener('click', () => {
+  const isPasswordVisible = passwordInput.type === 'text';
+  passwordInput.type = isPasswordVisible ? 'password' : 'text';
+
+  togglePassword.classList = isPasswordVisible ? 'ph ph-eye' : 'ph ph-eye-closed';
+});

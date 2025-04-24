@@ -118,8 +118,8 @@ a {
   background-color: #ebebeb;
 }
 
-/* Modal de Login e Cadastro */
-.modal-sign {
+/* Modal de Login#e Cadastro */
+#modal-sign {
   position: fixed;
   top: 0;
   left: 0;
@@ -135,12 +135,12 @@ a {
   transition: visibility 0s, opacity 0.3s ease;
 }
 
-.modal-sign.active {
+#modal-sign.active {
   visibility: visible;
   opacity: 1;
 }
 
-.modal-sign .sign-content {
+#modal-sign .sign-content {
   background-color: #fff;
   border-radius: 6px;
   width: 25%;
@@ -154,7 +154,7 @@ a {
   padding: 20px;
 }
 
-.modal-sign .sign-content h2 {
+#modal-sign .sign-content h2 {
   width: 100%;
   background-color: #ffed06;
   font-size: 1.2em;
@@ -162,7 +162,7 @@ a {
   border-radius: 6px;
 }
 
-.modal-sign .sign-content form {
+#modal-sign .sign-content #loginForm {
   height: 70%;
   width: 100%;
   display: flex;
@@ -171,7 +171,7 @@ a {
   justify-content: space-between;
 }
 
-.modal-sign .sign-content form input {
+#modal-sign .sign-content #loginForm input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -181,11 +181,31 @@ a {
   background-color: #f1f1f1;
 }
 
-.modal-sign .sign-content input:focus {
+#modal-sign .sign-content input:focus {
   border: 1px solid #3483fa;
 }
 
-.modal-sign .sign-content button,
+.password-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#password {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#modal-sign .sign-content button,
 .left_side .header button {
   background-color: #3483fa;
   color: #fff;
@@ -198,7 +218,7 @@ a {
   transition: 0.3s ease;
 }
 
-.modal-sign .sign-content button:hover,
+#modal-sign .sign-content button:hover,
 .left_side .header button:hover {
   background-color: #2968c8;
 }
