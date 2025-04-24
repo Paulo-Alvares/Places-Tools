@@ -1,9 +1,9 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { Pool } = require("pg");
+// const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,29 +18,33 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-      const userResult = await pool.query(
-        "SELECT * FROM users WHERE email = $1",
-        [email]
-      );
+      // const userResult = await pool.query(
+      //   "SELECT * FROM users WHERE email = $1",
+      //   [email]
+      // );
 
-      if (userResult.rows.length === 0) {
+      // if (userResult.rows.length === 0) {
+      //   return res.status(401).json({ error: "Credenciais inválidas" });
+      // }
+
+      // const user = userResult.rows[0];
+
+      if (email !== process.env.EMAIL) {
         return res.status(401).json({ error: "Credenciais inválidas" });
       }
 
-      const user = userResult.rows[0];
-
-      const validPassword = await bcrypt.compare(password, user.password);
+      const validPassword = bcrypt.compare(password, process.env.PASSWORD);
       if (!validPassword) {
         return res.status(401).json({ error: "Credenciais inválidas" });
       }
 
       const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { email: process.env.EMAIL },
         process.env.JWT_SECRET,
-        { expiresIn: "7d" }
+        { expiresIn: "30d" }
       );
 
-      res.status(200).json({ token, user: { id: user.id, email: user.email } });
+      res.status(200).json({ token, user: { email: process.env.EMAIL } });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
