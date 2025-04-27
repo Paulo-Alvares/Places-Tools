@@ -1,33 +1,31 @@
-require("dotenv").config();
 const { Pool } = require("pg");
+require("dotenv").config();
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 module.exports = async (req, res) => {
   const { shortUrl } = req.query;
 
-  if (!shortUrl) {
-    return res.status(400).json({ error: "URL encurtada não fornecida." });
-  }
-
   try {
     const result = await pool.query(
-      "SELECT * FROM links WHERE short_url = $1",
+      "SELECT original_url FROM links WHERE short_url = $1",
       [shortUrl]
     );
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: "URL encurtada não encontrada." });
+    if (result.rowCount === 0) {
+      return res.redirect("/404.html");
     }
+
+    const originalUrl = result.rows[0].original_url;
 
     await pool.query(
       "UPDATE links SET clicks = clicks + 1 WHERE short_url = $1",
       [shortUrl]
     );
 
-    res.writeHead(301, { Location: result.rows[0].original_url });
-    res.end();
+    res.redirect(originalUrl);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
