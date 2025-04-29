@@ -170,15 +170,13 @@ function copyToClipboard(event) {
 }
 
 async function loadLinks() {
-  const { isAuthenticated } = checkAuth();
-  const headers = {};
+  const token = localStorage.getItem("authToken");
 
-  const token = localStorage.getItem("token");
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (!token) {
+    window.location.href = "/login.html";
   }
 
-  const response = await fetch("/api/list", { headers });
+  const response = await fetch("/api/list");
   if (!response.ok) {
     const error = await response.json();
     alert(`Erro: ${error.error}`);
