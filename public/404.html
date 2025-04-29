@@ -9,16 +9,25 @@
       type="image/x-icon"
     />
     <title>PlacesTools - Link Não Encontrado</title>
-    <link rel="stylesheet" href="404.css">
+    <link rel="stylesheet" href="404.css" />
   </head>
   <body>
     <header>
-      <img src="assets/logo_meli.svg" alt="Logo do Mercado Livre">
+      <img src="assets/logo_meli.svg" alt="Logo do Mercado Livre" />
     </header>
     <div class="container">
-      <h1>Oops!</h1>
-      <img src="assets/404.svg" alt="Imagem de Erro 404">
-      <p>O link que você tentou acessar não existe.</p>
+      <img src="assets/404.svg" alt="Imagem de Erro 404" id="image" />
+      <p>Oops... o link que você tentou acessar não existe.</p>
     </div>
   </body>
+
+  <script>
+    window.addEventListener("resize", () => {
+      const image = document.getElementById("image");
+      const isTablet =
+        window.innerWidth <= 720 ? "assets/404_mobile.svg" : "assets/404.svg";
+
+      image.src = isTablet;
+    });
+  </script>
 </html>

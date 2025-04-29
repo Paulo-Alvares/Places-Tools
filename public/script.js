@@ -80,21 +80,10 @@ loginButton.addEventListener("click", () => {
 });
 
 async function shortenUrl(url) {
-  const { isAuthenticated } = checkAuth();
-
-  if (!isAuthenticated) {
-    alert("Você precisa estar logado para encurtar URLs.");
-    window.location.href = "/login.html";
-    return;
-  }
-
   try {
     const response = await fetch("/api/shorten", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url }),
     });
 
@@ -111,7 +100,7 @@ async function shortenUrl(url) {
       <div class="copy" onclick="copyToClipboard(event)">
         <img src="assets/copy_icon.svg" alt="Ícone de Cópia" />
       </div>
-    `;
+      `;
 
     loadLinks();
   } catch (error) {
@@ -170,12 +159,6 @@ function copyToClipboard(event) {
 }
 
 async function loadLinks() {
-  const token = localStorage.getItem("authToken");
-
-  if (!token) {
-    window.location.href = "/login.html";
-  }
-
   const response = await fetch("/api/list");
   if (!response.ok) {
     const error = await response.json();
@@ -258,14 +241,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-const togglePassword = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
 
-togglePassword.addEventListener("click", () => {
-  const isPasswordVisible = passwordInput.type === "text";
-  passwordInput.type = isPasswordVisible ? "password" : "text";
+togglePassword.addEventListener('click', () => {
+  const isPasswordVisible = passwordInput.type === 'text';
+  passwordInput.type = isPasswordVisible ? 'password' : 'text';
 
-  togglePassword.classList = isPasswordVisible
-    ? "ph ph-eye"
-    : "ph ph-eye-closed";
+  togglePassword.classList = isPasswordVisible ? 'ph ph-eye' : 'ph ph-eye-closed';
 });

@@ -1,30 +1,34 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./fonts/ProximaNova-Regular.woff2") format("woff2"),
+    url("./fonts/ProximaNova-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova SemiBold";
+  src: url("./fonts/ProximaNova-SemiBold.woff") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Proxima Nova Bold";
+  src: url("./fonts/ProximaNova-ExtraBold.woff") format("woff");
+  font-weight: bolder;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Proxima Nova Semibold", serif;
 }
 
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   overflow: hidden;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1.2rem;
-}
-
-a {
-  display: inline-block;
-  margin-top: 2rem;
-  font-size: 1rem;
-  color: #007bff;
-  text-decoration: none;
 }
 
 header {
@@ -41,7 +45,6 @@ header img {
 }
 
 .container {
-  position: relative;
   width: 100%;
   height: 80vh;
   display: flex;
@@ -51,16 +54,10 @@ header img {
 }
 
 .container img {
-  width: 30%;
-}
-
-.container h1 {
-  position: absolute;
-  top: 8rem;
+  width: 40%;
 }
 
 .container p {
-  position: absolute;
-  font-size: 1.7rem;
-  bottom: 5rem;
+  font-size: 1.5rem;
+  max-width: 70%;
 }
