@@ -23,6 +23,20 @@ module.exports = async (req, res) => {
     const crypto = require("crypto");
     const shortUrl = crypto.randomBytes(4).toString("hex");
 
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({ error: "Token não fornecido" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      return res.status(403).json({ error: "Token inválido" });
+    }
+
     try {
       const result = await pool.query(
         "INSERT INTO links (original_url, short_url) VALUES ($1, $2) RETURNING *",
